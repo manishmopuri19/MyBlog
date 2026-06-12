@@ -1,0 +1,59 @@
+.article-card{
+
+    min-width:320px;
+
+    height:220px;
+
+    padding:1.5rem;
+
+    border-radius:20px;
+
+    background:#111111;
+
+    border:1px solid #27272a;
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.article-card:hover{
+
+    transform:
+    perspective(1000px)
+    rotateX(4deg)
+    rotateY(-8deg)
+    scale(1.04);
+
+    background:#18181b;
+}
+
+.article-card span{
+
+    color:#71717a;
+}
+
+.article-card h3{
+
+    color:white;
+
+    margin-top:1rem;
+
+    margin-bottom:1rem;
+}
+
+.article-card p{
+
+    color:#a1a1aa;
+
+    line-height:1.6;
+}
+
+.article-card small{
+
+    display:block;
+
+    margin-top:1.5rem;
+
+    color:#71717a;
+}

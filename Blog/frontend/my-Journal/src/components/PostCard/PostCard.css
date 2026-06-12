@@ -1,0 +1,48 @@
+.post-card{
+
+    min-width:320px;
+
+    height:220px;
+
+    background:#111111;
+
+    border:1px solid #27272a;
+
+    border-radius:16px;
+
+    padding:1.5rem;
+
+    transition:.3s;
+}
+
+.post-card:hover{
+
+    transform:translateY(-6px);
+
+    background:#18181b;
+}
+
+.post-card h3{
+
+    color:white;
+
+    margin-bottom:1rem;
+}
+
+.excerpt{
+
+    color:#a1a1aa;
+
+    line-height:1.6;
+}
+
+.post-meta{
+
+    margin-top:1.5rem;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#71717a;
+}

@@ -1,0 +1,23 @@
+.latest-section{
+
+    padding:4rem 6rem;
+}
+
+.latest-section h2{
+
+    color:white;
+
+    margin-bottom:2rem;
+
+    font-size:2rem;
+}
+
+.latest-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:2rem;
+}

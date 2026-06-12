@@ -1,7 +1,9 @@
-import Home from "./pages/landingPage/Home";
 import {Route,Routes} from "react-router-dom"
 import Login from "./pages/authPages/login";
 import Register from "./pages/authPages/register"
+import LandingPage from "./pages/landingPage/LandingPage";
+import Home from "./pages/Home/Home.jsx";
+import ReaderHome from "./pages/ReaderHome/ReaderHome.jsx";
 function App() {
 
   return (
@@ -18,6 +20,11 @@ function App() {
       <Route
         path="/register"
         element={<Register />}
+      />
+
+      <Route
+        path="/reader"
+        element={<ReaderHome />}
       />
     </Routes>
   );

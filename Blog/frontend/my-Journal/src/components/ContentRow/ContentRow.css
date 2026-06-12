@@ -1,0 +1,27 @@
+.content-row{
+
+    padding:2rem 4rem;
+}
+
+.content-row h2{
+
+    color:white;
+
+    margin-bottom:1rem;
+}
+
+.row-scroll{
+
+    display:flex;
+
+    gap:1rem;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+}
+
+.row-scroll::-webkit-scrollbar{
+
+    display:none;
+}

@@ -2,7 +2,7 @@
 import Hero from "../../components/Hero/Hero.jsx";
 import NavBar from "../../components/NavBar/NavBar.jsx"
 
-function Home(){
+function LandingPage(){
 
     return (
         <>
@@ -12,4 +12,4 @@ function Home(){
     )
 }
 
-export default Home;
+export default LandingPage;
