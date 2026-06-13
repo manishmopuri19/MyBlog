@@ -4,9 +4,18 @@ import FeaturedBanner from "../../components/FeaturedBanner/FeaturedBanner";
 import ContentRow from "../../components/ContentRow/ContentRow";
 
 import { mockPosts } from "../../data/mockPosts";
-
+import "./ReaderHome.css"
+import { usePosts } from "../../hooks/usePosts";
 function ReaderHome() {
 
+  const {posts,loading}=usePosts();
+  if(loading){
+    return(
+      <h1>
+        Loading...
+      </h1>
+    )
+  }
   const thoughts =
     mockPosts.filter(
       post => post.category === "Thoughts"
@@ -38,36 +47,47 @@ function ReaderHome() {
       <NavBar />
 
       <FeaturedBanner />
-
+      
       <ContentRow
         title="Recently Published"
         posts={mockPosts}
       />
 
+
+      <section id="thoughts">
       <ContentRow
         title="Thoughts"
         posts={thoughts}
       />
+</section>
 
+      <section id="tech">
       <ContentRow
         title="Tech"
         posts={tech}
       />
+      </section>
 
+      <section id="research">
       <ContentRow
         title="Research"
         posts={research}
       />
+      </section>
 
+      <section id="philosophy">
       <ContentRow
         title="Philosophy"
         posts={philosophy}
       />
+      </section>
 
+      <section id="simulations">
       <ContentRow
         title="Simulations"
         posts={simulations}
       />
+      </section>
 
     </>
 

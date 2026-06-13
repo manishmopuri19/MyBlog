@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { loginUser } from "../../services/authService";
 import "./Auth.css";
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
   } = useForm();
 
   const onSubmit=(data)=>{
-    console.log(data);
+    loginUser(data);
   };
 
   return(

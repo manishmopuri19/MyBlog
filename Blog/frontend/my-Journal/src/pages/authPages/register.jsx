@@ -1,6 +1,7 @@
 import {useForm} from "react-hook-form"
 import { Link } from "react-router-dom"
 import "./Auth.css"
+import { registerUser } from "../../services/authService";
 
 function Register(){
 
@@ -9,7 +10,7 @@ function Register(){
     const password=watch("password");
 
     const onSubmit=(data)=>{
-        console.log(data);
+      registerUser(data);
     };
 
     return (

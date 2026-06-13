@@ -1,10 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import "./ArticleCard.css";
 
 function ArticleCard({ post }) {
 
+  const navigate=useNavigate()
+
   return (
 
-    <div className="article-card">
+    <div className="article-card" 
+    onClick={()=>{
+      navigate(`/posts/${post.slug}`)
+    }} >
 
       <span>
         {post.category}

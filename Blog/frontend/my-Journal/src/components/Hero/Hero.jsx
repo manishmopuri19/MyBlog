@@ -9,7 +9,7 @@ function Hero(){
 
         <section className="hero">
             <div className="hero-left">
-                <p className="her-tag">
+                <p className="hero-tag">
                     Personal Journal
                 </p>
 
