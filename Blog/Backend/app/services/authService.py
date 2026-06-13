@@ -27,7 +27,15 @@ def register_user(db:Session,request):
 
     db.add(user)
 
-    db.commit()
+    try:
+        db.commit()
+        db.refresh(user)
+    except Exception:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Registration failed"
+        )
 
     return user
 

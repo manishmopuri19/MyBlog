@@ -1,9 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from fastapi import HTTPException,status
+from fastapi import HTTPException, status
 from app.models.postModel import Post
 from app.models.post_tagModel import post_tags
-from app.enums.categoryEnum import CategoryEnum
 from app.models.TagModel import Tag
 
 def create_post(db:Session,request,user_id:int):
@@ -11,10 +10,10 @@ def create_post(db:Session,request,user_id:int):
   
     
     slug=(
-        request.tilte.lower().replace(" ","_")
+        request.title.lower().replace(" ","_")
     )
 
-    post=post(
+    post=Post(
         title=request.title,
         content=request.content,
         slug=slug,
@@ -24,21 +23,19 @@ def create_post(db:Session,request,user_id:int):
     )
 
     if request.tag_ids:
-        stmt=(
-            select(Tag).where(Tag.id.in_(request.tag_ids))
-        )
-    
-    tags=(
-        db.execute(stmt)
-        .scalar()
-        .all()
-    )
-    post.tags=tags
+        stmt=(select(Tag).where(Tag.id.in_(request.tag_ids)))
+        post.tags=(db.execute(stmt).scalars().all())
+
     db.add(post)
     db.commit()
     db.refresh(post)
 
     return post
+
+def get_all_posts_admin(db: Session):
+    stmt = select(Post).order_by(Post.created_at.desc())
+    return db.execute(stmt).unique().scalars().all()
+
 
 def get_posts(db:Session):
     stmt=(
@@ -100,36 +97,20 @@ def update_post(db:Session,post_id:int,request):
 
     if request.title:
         post.title=request.title
+        post.slug=(request.title.lower().replace(" ","_"))
 
-        post.slug=(
-            request.title
-            .lower()
-            .replace(" ","_")
-        )
+    if request.content:
+        post.content=request.content
 
-        if request.content:
+    if request.category:
+        post.category=request.category
 
-            post.content=request.content
-        
-        if request.category:
+    if request.is_published is not None:
+        post.is_published=request.is_published
 
-            post.category=request.category
-        
-        if request.is_published is not None:
-            post.is_published=request.is_published
-
-        if request.tag_ids is not None:
-            stmt=(select(Tag)
-                  .where(
-                      Tag.id.in_(request.tag_ids)
-                  ))
-            
-            tags=(
-                db.execute(stmt)
-                .scalars()
-                .all()
-            )
-            post.tags = tags
+    if request.tag_ids is not None:
+        stmt=(select(Tag).where(Tag.id.in_(request.tag_ids)))
+        post.tags=(db.execute(stmt).scalars().all())
 
     db.commit()
 
@@ -143,7 +124,7 @@ def delete_post(db:Session,post_id:int):
     db.commit()
 
     return {
-        "message":"post deletted successfully"
+        "message":"post deleted successfully"
     }
 
 def publish_post(db:Session,post_id:int):

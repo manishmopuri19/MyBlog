@@ -12,13 +12,11 @@ class Post(Base):
 
     id=Column(Integer,primary_key=True)
 
-    title=Column(String(255))
-
-    content=Column(Text)
-    slug=Column(String(255),unique=True,nullable=False
-)
+    title=Column(String(255),nullable=False)
 
     content=Column(Text,nullable=False)
+
+    slug=Column(String(255),unique=True,nullable=False)
     is_published = Column(
         Boolean,
         default=False

@@ -1,98 +1,56 @@
 import NavBar from "../../components/NavBar/NavBar";
-
 import FeaturedBanner from "../../components/FeaturedBanner/FeaturedBanner";
 import ContentRow from "../../components/ContentRow/ContentRow";
-
 import { mockPosts } from "../../data/mockPosts";
-import "./ReaderHome.css"
 import { usePosts } from "../../hooks/usePosts";
+import "./ReaderHome.css";
+
 function ReaderHome() {
+  const { posts: apiPosts, loading } = usePosts();
 
-  const {posts,loading}=usePosts();
-  if(loading){
-    return(
-      <h1>
-        Loading...
-      </h1>
-    )
+  if (loading) {
+    return (
+      <div className="reader-loading">
+        <NavBar />
+        <div className="reader-loading-content">
+          <div className="reader-spinner" />
+        </div>
+      </div>
+    );
   }
-  const thoughts =
-    mockPosts.filter(
-      post => post.category === "Thoughts"
-    );
 
-  const tech =
-    mockPosts.filter(
-      post => post.category === "Tech"
-    );
+  // Use real API posts when available, fall back to mock during development
+  const posts = apiPosts.length > 0 ? apiPosts : mockPosts;
 
-  const research =
-    mockPosts.filter(
-      post => post.category === "Research"
-    );
-
-  const philosophy =
-    mockPosts.filter(
-      post => post.category === "Philosophy"
-    );
-
-  const simulations =
-    mockPosts.filter(
-      post => post.category === "Simulations"
-    );
+  const technology  = posts.filter((p) => p.category === "Technology");
+  const philosophy  = posts.filter((p) => p.category === "Philosophy");
+  const research    = posts.filter((p) => p.category === "Research");
+  const personal    = posts.filter((p) => p.category === "Personal");
 
   return (
-
     <>
       <NavBar />
-
       <FeaturedBanner />
-      
-      <ContentRow
-        title="Recently Published"
-        posts={mockPosts}
-      />
 
+      <ContentRow title="Recently Published" posts={posts} />
 
-      <section id="thoughts">
-      <ContentRow
-        title="Thoughts"
-        posts={thoughts}
-      />
-</section>
-
-      <section id="tech">
-      <ContentRow
-        title="Tech"
-        posts={tech}
-      />
-      </section>
-
-      <section id="research">
-      <ContentRow
-        title="Research"
-        posts={research}
-      />
+      <section id="technology">
+        <ContentRow title="Technology" posts={technology} />
       </section>
 
       <section id="philosophy">
-      <ContentRow
-        title="Philosophy"
-        posts={philosophy}
-      />
+        <ContentRow title="Philosophy" posts={philosophy} />
       </section>
 
-      <section id="simulations">
-      <ContentRow
-        title="Simulations"
-        posts={simulations}
-      />
+      <section id="research">
+        <ContentRow title="Research" posts={research} />
       </section>
 
+      <section id="personal">
+        <ContentRow title="Personal" posts={personal} />
+      </section>
     </>
-
   );
-
 }
 
 export default ReaderHome;

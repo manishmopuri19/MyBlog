@@ -4,6 +4,31 @@
 
     min-height:100vh;
 }
+.reader-loading{
+    background:#09090b;
+    min-height:100vh;
+}
+
+.reader-loading-content{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.reader-spinner{
+    width:32px;
+    height:32px;
+    border:2px solid #27272a;
+    border-top-color:white;
+    border-radius:50%;
+    animation:spin 0.75s linear infinite;
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}
+
 .reader-home::before{
 
     content:"";
