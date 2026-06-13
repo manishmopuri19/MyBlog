@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class CategoryCreaye(BaseModel):
+class CategoryCreate(BaseModel):
     name:str

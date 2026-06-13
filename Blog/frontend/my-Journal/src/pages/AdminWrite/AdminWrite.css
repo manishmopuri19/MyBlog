@@ -1,0 +1,352 @@
+.admin-page {
+  min-height: 100vh;
+  background: #09090b;
+  color: white;
+}
+
+/* ── Dashboard (list view) ── */
+.admin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.admin-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.admin-subtitle {
+  color: #71717a;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.admin-new-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.admin-new-btn:hover {
+  opacity: 0.85;
+}
+
+.admin-message {
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-message.success {
+  background: #052e16;
+  border: 1px solid #166534;
+  color: #4ade80;
+}
+
+.admin-message.error {
+  background: #2a1515;
+  border: 1px solid #7f1d1d;
+  color: #f87171;
+}
+
+.admin-loading {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.admin-spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #27272a;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 5rem 0;
+  color: #71717a;
+}
+
+.admin-empty button {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid #27272a;
+  color: white;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.admin-empty button:hover {
+  border-color: #52525b;
+}
+
+/* ── Post table ── */
+.post-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  background: #111113;
+  border: 1px solid #1c1c1f;
+  border-radius: 10px;
+  gap: 1rem;
+  transition: border-color 0.2s;
+}
+
+.post-row:hover {
+  border-color: #27272a;
+}
+
+.post-row-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.published { background: #4ade80; }
+.status-dot.draft     { background: #52525b; }
+
+.post-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.post-row-title {
+  color: white;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-row-meta {
+  color: #71717a;
+  font-size: 0.8rem;
+}
+
+.post-row-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.row-btn {
+  background: transparent;
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.row-btn:hover {
+  border-color: #52525b;
+  color: white;
+}
+
+.row-btn.danger:hover {
+  border-color: #7f1d1d;
+  color: #f87171;
+}
+
+/* ── Write / Edit mode ── */
+.write-mode {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.write-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  border-bottom: 1px solid #18181b;
+  background: #09090b;
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.write-back-btn {
+  background: transparent;
+  border: none;
+  color: #71717a;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.write-back-btn:hover { color: white; }
+
+.write-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.write-inline-msg {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+}
+
+.write-inline-msg.success { color: #4ade80; }
+.write-inline-msg.error   { color: #f87171; }
+
+.publish-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.publish-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: white;
+  cursor: pointer;
+}
+
+.toggle-label {
+  font-size: 0.8rem;
+  color: #a1a1aa;
+  white-space: nowrap;
+}
+
+.category-select {
+  background: #111113;
+  border: 1px solid #27272a;
+  color: white;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.category-select option { background: #111113; }
+
+.write-save-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.write-save-btn:hover    { opacity: 0.85; }
+.write-save-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ── Editor body ── */
+.write-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  overflow: hidden;
+}
+
+.write-title-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+}
+
+.write-title-input::placeholder { color: #3f3f46; }
+
+.write-divider {
+  width: 100%;
+  height: 1px;
+  background: #18181b;
+  margin: 1.5rem 0;
+  flex-shrink: 0;
+}
+
+.write-content-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #d4d4d8;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  resize: none;
+  font-family: inherit;
+  width: 100%;
+}
+
+.write-content-input::placeholder { color: #3f3f46; }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .admin-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .post-row { flex-direction: column; align-items: flex-start; }
+  .post-row-actions { width: 100%; justify-content: flex-end; }
+  .write-topbar { padding: 0 1rem; }
+  .write-topbar-right { gap: 0.5rem; }
+  .write-title-input { font-size: 1.75rem; }
+}

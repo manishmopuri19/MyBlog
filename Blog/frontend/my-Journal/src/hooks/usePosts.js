@@ -2,14 +2,14 @@ import { useState,useEffect } from "react";
 import { getPosts } from "../services/postService";
 
 export function usePosts(){
-    const [posts,setPost]=useState([]);
+    const [posts,setPosts]=useState([]);
     const [loading,setLoading]=useState(true);
 
     useEffect(()=>{
         const fetchPosts=async()=>{
             try{
                 const data=await getPosts();
-                setPost(data);
+                setPosts(data);
             }
             finally{
                 setLoading(false);
