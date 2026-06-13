@@ -40,10 +40,6 @@
     gap:1rem;
 }
 
-.register-btn{
-    border:1px solid white;
-    padding:.5rem 1rem;
-}
 
 .auth-links a{
     text-decoration:none;
@@ -54,4 +50,32 @@
     padding:.7rem 1.3rem;
     border:1px solid white;
     border-radius:8px;
+}
+
+section{
+    scroll-margin-top: 100px;
+}
+.logo{
+    font-size: 25px;
+}
+.G{
+    color: black;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.logout-btn{
+    background: transparent;
+    border: 1px solid #27272a;
+    color: #a1a1aa;
+    padding: .6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.logout-btn:hover{
+    border-color: #52525b;
+    color: white;
 }

@@ -1,32 +1,38 @@
 import { NavLink } from "react-router-dom";
 
 import "./NavBar.css"
-
+import { useAuth } from "../../context/AuthContext";
 function NavBar(){
+
+    const {isAuthenticated, logout}=useAuth();
     const links=[
         {
             name:"Thoughts",
-            path:"/thoughts"
+            id:"thoughts"
         },
         {
             name:"Tech",
-            path:"/tech"
+            id:"tech"
         },
-        {
-            name:"Concepts",
-            path:"/concepts"
-        },
+       
         {
             name:"Research",
-            path:"/research"
+            id:"research"
+        }, {
+            name:"Philosophy",
+            id:"philosophy"
         }
     ];
 
+    const scrollToSection=(id)=>{
+        const element=document.getElementById(id);
+        element?.scrollIntoView({behavior:"smooth"});
+    }
     return (
 
         <nav className="navbar">
             <div className="logo">
-                M
+                MA<span className="G">G</span>
             </div>
 
             <div className="nav-links">
@@ -35,7 +41,8 @@ function NavBar(){
                     links.map((item)=>(
                         <NavLink
                         key={item.name}
-                        to={item.path}
+                        className="nav-btn"
+                        onClick={()=>scrollToSection(item.id)}
                         >
                             {item.name}
                     </NavLink>
@@ -43,16 +50,16 @@ function NavBar(){
                 }
             </div>
 
-            <div className="auth-links">
-
-                <NavLink to={"/login"}>Login</NavLink>
-                 <NavLink
-          className="register-btn"
-          to="/register"
-        >
-          Register
-        </NavLink>
-            </div>
+           {isAuthenticated ? (
+                <div className="auth-links">
+                    <button className="logout-btn" onClick={logout}>Logout</button>
+                </div>
+            ) : (
+                <div className="auth-links">
+                    <NavLink to={"/login"}>Login</NavLink>
+                    <NavLink className="register-btn" to="/register">Register</NavLink>
+                </div>
+            )}
 
         </nav>
     )

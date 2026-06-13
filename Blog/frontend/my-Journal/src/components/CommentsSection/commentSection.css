@@ -1,0 +1,122 @@
+.comment-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+
+.comment-auth-prompt {
+  padding: 1.25rem 1.5rem;
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 10px;
+  color: #71717a;
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+.comment-auth-prompt a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #3f3f46;
+  transition: border-color 0.2s;
+}
+
+.comment-auth-prompt a:hover {
+  border-bottom-color: white;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.comment-input {
+  width: 100%;
+  background: #111113;
+  border: 1px solid #27272a;
+  border-radius: 10px;
+  color: white;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+.comment-input::placeholder {
+  color: #52525b;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #3f3f46;
+}
+
+.comment-submit {
+  align-self: flex-end;
+  background: white;
+  color: black;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.comment-submit:hover {
+  opacity: 0.85;
+}
+
+.comment-submit:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-item {
+  padding: 1.25rem 1.5rem;
+  background: #111113;
+  border: 1px solid #1c1c1f;
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.comment-item:hover {
+  border-color: #27272a;
+}
+
+.comment-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.comment-author {
+  font-size: 0.875rem;
+  color: white;
+  font-weight: 500;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: #52525b;
+}
+
+.comment-text {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}

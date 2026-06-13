@@ -1,0 +1,260 @@
+/* ── Page shell ── */
+.blog-detail-page {
+  min-height: 100vh;
+  background: #09090b;
+  color: white;
+}
+
+/* ── Loading / error states ── */
+.blog-state {
+  min-height: 100vh;
+  background: #09090b;
+}
+
+.blog-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1.5rem;
+  color: #a1a1aa;
+  text-align: center;
+  padding: 2rem;
+}
+
+.blog-state-content h2 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.blog-state-content p {
+  font-size: 0.95rem;
+  color: #71717a;
+}
+
+.blog-state-content button {
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1px solid #27272a;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.blog-state-content button:hover {
+  border-color: #71717a;
+}
+
+.blog-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #27272a;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Post header ── */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72vh;
+  padding: 0 8rem;
+  padding-top: 100px;
+  border-bottom: 1px solid #18181b;
+}
+
+.post-header-text {
+  width: 55%;
+}
+
+.post-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.post-category {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid #27272a;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+}
+
+.post-read-time {
+  color: #71717a;
+  font-size: 0.875rem;
+}
+
+.post-title {
+  font-size: 3.5rem;
+  line-height: 1.08;
+  color: white;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+}
+
+.post-meta-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #71717a;
+  font-size: 0.875rem;
+}
+
+.post-author {
+  color: #a1a1aa;
+}
+
+.meta-dot {
+  color: #3f3f46;
+}
+
+/* 3D scene panel */
+.post-header-scene {
+  width: 38%;
+  height: 420px;
+}
+
+/* ── Article body ── */
+.post-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 2rem 3rem;
+}
+
+.post-content {
+  color: #d4d4d8;
+  font-size: 1.15rem;
+  line-height: 1.9;
+}
+
+.post-content p + p {
+  margin-top: 1.5rem;
+}
+
+/* ── Action bar ── */
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #18181b;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  color: #a1a1aa;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.action-btn:hover {
+  border-color: #52525b;
+  color: white;
+}
+
+.action-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Like: filled red when active */
+.like-btn.liked {
+  border-color: #7f1d1d;
+  color: #f87171;
+}
+
+.like-btn.liked:hover {
+  border-color: #991b1b;
+  color: #fca5a5;
+}
+
+/* Share pushed to the right */
+.share-btn {
+  margin-left: auto;
+}
+
+/* Back button subtler */
+.back-btn {
+  color: #71717a;
+  border-color: transparent;
+}
+
+.back-btn:hover {
+  border-color: #27272a;
+  color: white;
+}
+
+/* ── Comments section ── */
+.comments-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2rem 7rem;
+  border-top: 1px solid #18181b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2rem;
+    padding-top: 100px;
+    min-height: auto;
+    gap: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .post-header-text {
+    width: 100%;
+  }
+
+  .post-header-scene {
+    width: 100%;
+    height: 280px;
+  }
+
+  .post-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .post-title {
+    font-size: 1.75rem;
+  }
+
+  .post-content {
+    font-size: 1rem;
+  }
+
+  .share-btn {
+    margin-left: 0;
+  }
+}
