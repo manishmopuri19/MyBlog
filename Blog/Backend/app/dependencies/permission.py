@@ -8,7 +8,7 @@ def admin_required(current_user=Depends(get_current_user)):
    if current_user.get("role")!=RoleEnum.ADMIN.value:
       raise HTTPException(
          status_code=403,
-         detail="Not Authoriszed"
+         detail="Not Authorized"
       )
    
    return current_user

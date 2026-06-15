@@ -18,7 +18,7 @@ def create_post_endpoint(
     db: Session = Depends(get_db),
     current_user=Depends(admin_required)
 ):
-    return create_post(db=db, request=request, user_id=current_user["sub"])
+    return create_post(db=db, request=request, user_id=int(current_user["sub"]))
 
 
 @router.get("")

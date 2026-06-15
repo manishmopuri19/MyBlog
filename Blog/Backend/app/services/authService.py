@@ -55,7 +55,7 @@ def login_user(db:Session,request):
     
     if not verify_password(request.password,user.password_hash):
         raise HTTPException(status_code=401,
-                            detail="Invaild credentials")
+                            detail="Invalid credentials")
     
     token=create_access_token({"sub":str(user.id),
                                "role":user.role.value})

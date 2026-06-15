@@ -12,9 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-    ],
+    allow_origins="*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,14 +23,13 @@ Base.metadata.create_all(bind=engine)
 @app.get("/")
 def home():
     try:
-        connection = engine.connect()
-        connection.close()
-
+        with engine.connect():
+            pass
         return {
             "message": "database connected successfully"
         }
 
-    except Exception as e:
+    except Exception:
         return {
             "error": "server error"
         }
