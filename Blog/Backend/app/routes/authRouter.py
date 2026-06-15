@@ -2,13 +2,14 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database.database import get_db
 from app.schemas.authSchema import RegistrationRequest, LoginRequest
+from app.schemas.userSchema import userResponse
 from app.services.authService import register_user, login_user
 from app.dependencies.auth import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@router.post("/register", status_code=201)
+@router.post("/register", status_code=201, response_model=userResponse)
 def register(request: RegistrationRequest, db: Session = Depends(get_db)):
     return register_user(db, request)
 

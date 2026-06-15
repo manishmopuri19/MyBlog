@@ -1,17 +1,27 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 from app.models.postModel import Post
 from app.models.post_tagModel import post_tags
 from app.models.TagModel import Tag
 
+def _resolve_tags(db: Session, tag_ids: list[int]) -> list:
+    if not tag_ids:
+        return []
+    stmt = select(Tag).where(Tag.id.in_(tag_ids))
+    found = db.execute(stmt).scalars().all()
+    if len(found) != len(tag_ids):
+        found_ids = {t.id for t in found}
+        missing = [i for i in tag_ids if i not in found_ids]
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Tags not found: {missing}"
+        )
+    return found
+
 def create_post(db:Session,request,user_id:int):
-    
-  
-    
-    slug=(
-        request.title.lower().replace(" ","_")
-    )
+    slug = request.title.lower().replace(" ", "_")
 
     post=Post(
         title=request.title,
@@ -23,12 +33,18 @@ def create_post(db:Session,request,user_id:int):
     )
 
     if request.tag_ids:
-        stmt=(select(Tag).where(Tag.id.in_(request.tag_ids)))
-        post.tags=(db.execute(stmt).scalars().all())
+        post.tags = _resolve_tags(db, request.tag_ids)
 
     db.add(post)
-    db.commit()
-    db.refresh(post)
+    try:
+        db.commit()
+        db.refresh(post)
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="A post with this title already exists"
+        )
 
     return post
 
@@ -68,7 +84,7 @@ def get_post_by_id(db:Session,post_id:int):
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Post not found"
         )
-    
+
     return post
 
 
@@ -109,8 +125,7 @@ def update_post(db:Session,post_id:int,request):
         post.is_published=request.is_published
 
     if request.tag_ids is not None:
-        stmt=(select(Tag).where(Tag.id.in_(request.tag_ids)))
-        post.tags=(db.execute(stmt).scalars().all())
+        post.tags = _resolve_tags(db, request.tag_ids)
 
     db.commit()
 
