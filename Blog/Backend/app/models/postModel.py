@@ -14,6 +14,8 @@ class Post(Base):
 
     title=Column(String(255),nullable=False)
 
+    description=Column(Text,nullable=True)
+
     content=Column(Text,nullable=False)
 
     slug=Column(String(255),unique=True,nullable=False)

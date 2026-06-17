@@ -23,7 +23,7 @@ const CAT_CLASS = {
   "Case Studies":     "cat-cases",
 };
 
-const EMPTY_FORM = { title: "", content: "", category: "Personal", is_published: false };
+const EMPTY_FORM = { title: "", description: "", content: "", category: "Personal", is_published: false };
 
 const fmtDate = (d) =>
   d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—";
@@ -67,6 +67,7 @@ export default function AdminWrite() {
   function startEdit(post) {
     setForm({
       title: post.title,
+      description: post.description || "",
       content: post.content,
       category: post.category,
       is_published: post.is_published,
@@ -195,6 +196,14 @@ export default function AdminWrite() {
             onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
             autoFocus
           />
+          <textarea
+            className="editor-description-input"
+            placeholder="Short description — shown on cards and previews (max 500 chars)…"
+            value={form.description}
+            maxLength={500}
+            rows={2}
+            onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
+          />
           <div className="editor-divider" />
           <textarea
             className="editor-content-input"
@@ -220,7 +229,7 @@ export default function AdminWrite() {
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="sidebar-logo">
-          MA<span className="logo-g">G</span>
+          MA< span className="logo-g">G</span>
           <span className="admin-badge">Admin</span>
         </div>
 

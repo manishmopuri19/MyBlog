@@ -7,6 +7,7 @@ from app import models
 
 from app.routes.authRouter import router as auth_router
 from app.routes.postRouter import router as post_router
+from app.routes.commentRouter import router as comment_router
 
 app = FastAPI()
 
@@ -37,3 +38,4 @@ def home():
 
 app.include_router(auth_router)
 app.include_router(post_router)
+app.include_router(comment_router)

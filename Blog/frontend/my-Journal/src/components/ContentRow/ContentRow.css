@@ -1,27 +1,33 @@
-.content-row{
-
-    padding:2rem 4rem;
+.content-row {
+  padding: 2.5rem 4rem;
 }
 
-.content-row h2{
-
-    color:white;
-
-    margin-bottom:1rem;
+.content-row h2 {
+  color: white;
+  margin-bottom: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.row-scroll{
-
-    display:flex;
-
-    gap:1rem;
-
-    overflow-x:auto;
-
-    scrollbar-width:none;
+/* fade line after section title */
+.content-row h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #27272a, transparent);
 }
 
-.row-scroll::-webkit-scrollbar{
+.row-scroll {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
 
-    display:none;
+.row-scroll::-webkit-scrollbar {
+  display: none;
 }

@@ -1,48 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getComments, createComment } from "../../services/postService";
 import "./commentSection.css";
 
-const mockComments = [
-  {
-    id: 1,
-    author: "Alex M.",
-    text: "This really resonated with me. The way you framed the idea is sharp.",
-    date: "Jun 10, 2025",
-  },
-  {
-    id: 2,
-    author: "Sam L.",
-    text: "Great read. Would love to see a follow-up on this topic.",
-    date: "Jun 11, 2025",
-  },
-];
-
 export default function CommentSection({ postId, isAuthenticated }) {
-  const [comments, setComments] = useState(mockComments);
+  const [comments, setComments] = useState([]);
+  const [loadingComments, setLoadingComments] = useState(true);
   const [text, setText] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!postId) return;
+    setLoadingComments(true);
+    getComments(postId)
+      .then(setComments)
+      .catch(() => setComments([]))
+      .finally(() => setLoadingComments(false));
+  }, [postId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
     setSubmitting(true);
-
-    // Optimistic update — replace with real API call when backend is ready
-    // await postComment(postId, text);
-    const newComment = {
-      id: Date.now(),
-      author: "You",
-      text: text.trim(),
-      date: "Just now",
-    };
-    setComments((prev) => [newComment, ...prev]);
-    setText("");
-    setSubmitting(false);
+    setError(null);
+    try {
+      const newComment = await createComment(postId, text.trim());
+      setComments((prev) => [...prev, newComment]);
+      setText("");
+    } catch {
+      setError("Failed to post comment. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  const fmtDate = (d) =>
+    d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
 
   return (
     <section className="comment-section">
-      <h2 className="comment-heading">{comments.length} Comments</h2>
+      <h2 className="comment-heading">
+        {loadingComments ? "Comments" : `${comments.length} Comment${comments.length !== 1 ? "s" : ""}`}
+      </h2>
 
       {isAuthenticated ? (
         <form className="comment-form" onSubmit={handleSubmit}>
@@ -53,6 +53,7 @@ export default function CommentSection({ postId, isAuthenticated }) {
             onChange={(e) => setText(e.target.value)}
             rows={4}
           />
+          {error && <p className="comment-error">{error}</p>}
           <button
             className="comment-submit"
             type="submit"
@@ -68,15 +69,23 @@ export default function CommentSection({ postId, isAuthenticated }) {
       )}
 
       <div className="comment-list">
-        {comments.map((c) => (
-          <div className="comment-item" key={c.id}>
-            <div className="comment-item-header">
-              <span className="comment-author">{c.author}</span>
-              <span className="comment-date">{c.date}</span>
-            </div>
-            <p className="comment-text">{c.text}</p>
+        {loadingComments ? (
+          <div className="comment-loading">
+            <div className="comment-spinner" />
           </div>
-        ))}
+        ) : comments.length === 0 ? (
+          <p className="comment-empty">No comments yet. Be the first to share your thoughts.</p>
+        ) : (
+          comments.map((c) => (
+            <div className="comment-item" key={c.id}>
+              <div className="comment-item-header">
+                <span className="comment-author">{c.author_username ?? "Anonymous"}</span>
+                <span className="comment-date">{fmtDate(c.created_at)}</span>
+              </div>
+              <p className="comment-text">{c.content}</p>
+            </div>
+          ))
+        )}
       </div>
     </section>
   );

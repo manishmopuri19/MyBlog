@@ -25,6 +25,7 @@ def create_post(db:Session,request,user_id:int):
 
     post=Post(
         title=request.title,
+        description=request.description,
         content=request.content,
         slug=slug,
         category=request.category,
@@ -114,6 +115,9 @@ def update_post(db:Session,post_id:int,request):
     if request.title:
         post.title=request.title
         post.slug=(request.title.lower().replace(" ","_"))
+
+    if request.description is not None:
+        post.description=request.description
 
     if request.content:
         post.content=request.content

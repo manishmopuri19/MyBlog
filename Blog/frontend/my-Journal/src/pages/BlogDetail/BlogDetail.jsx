@@ -14,9 +14,9 @@ function BlogDetails() {
   const { isAuthenticated } = useAuth();
   const commentsRef = useRef(null);
 
-  // Optimistic like state — syncs with post data once loaded
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   // Set initial like count once post loads
   const initializedRef = useRef(false);
@@ -119,10 +119,18 @@ function BlogDetails() {
 
           <button
             className="action-btn share-btn"
-            onClick={() => navigator.clipboard?.writeText(window.location.href)}
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(window.location.href);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              } catch {
+                window.prompt("Copy this link:", window.location.href);
+              }
+            }}
             title="Copy link"
           >
-            Share ↗
+            {copied ? "Copied!" : "Share ↗"}
           </button>
 
           <button

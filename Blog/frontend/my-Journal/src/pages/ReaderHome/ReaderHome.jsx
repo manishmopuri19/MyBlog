@@ -1,7 +1,6 @@
 import NavBar from "../../components/NavBar/NavBar";
 import FeaturedBanner from "../../components/FeaturedBanner/FeaturedBanner";
 import ContentRow from "../../components/ContentRow/ContentRow";
-import { mockPosts } from "../../data/mockPosts";
 import { usePosts } from "../../hooks/usePosts";
 import "./ReaderHome.css";
 
@@ -19,36 +18,79 @@ function ReaderHome() {
     );
   }
 
-  // Use real API posts when available, fall back to mock during development
-  const posts = apiPosts.length > 0 ? apiPosts : mockPosts;
+  const posts = apiPosts;
 
   const technology  = posts.filter((p) => p.category === "Technology");
   const philosophy  = posts.filter((p) => p.category === "Philosophy");
   const research    = posts.filter((p) => p.category === "Research");
   const personal    = posts.filter((p) => p.category === "Personal");
+  const concepts    = posts.filter((p) => p.category === "Concepts");
+  const simulations = posts.filter((p) => p.category === "Fake Simulations");
+  const lifeExp     = posts.filter((p) => p.category === "Life Experiments");
+  const caseStudies = posts.filter((p) => p.category === "Case Studies");
 
   return (
     <>
       <NavBar />
       <FeaturedBanner />
 
-      <ContentRow title="Recently Published" posts={posts} />
+      {posts.length > 0 && (
+        <ContentRow title="Recently Published" posts={posts} />
+      )}
 
-      <section id="technology">
-        <ContentRow title="Technology" posts={technology} />
-      </section>
+      {technology.length > 0 && (
+        <section id="technology">
+          <ContentRow title="Technology" posts={technology} />
+        </section>
+      )}
 
-      <section id="philosophy">
-        <ContentRow title="Philosophy" posts={philosophy} />
-      </section>
+      {philosophy.length > 0 && (
+        <section id="philosophy">
+          <ContentRow title="Philosophy" posts={philosophy} />
+        </section>
+      )}
 
-      <section id="research">
-        <ContentRow title="Research" posts={research} />
-      </section>
+      {research.length > 0 && (
+        <section id="research">
+          <ContentRow title="Research" posts={research} />
+        </section>
+      )}
 
-      <section id="personal">
-        <ContentRow title="Personal" posts={personal} />
-      </section>
+      {personal.length > 0 && (
+        <section id="personal">
+          <ContentRow title="Personal" posts={personal} />
+        </section>
+      )}
+
+      {concepts.length > 0 && (
+        <section id="concepts">
+          <ContentRow title="Concepts" posts={concepts} />
+        </section>
+      )}
+
+      {simulations.length > 0 && (
+        <section id="fake-simulations">
+          <ContentRow title="Fake Simulations" posts={simulations} />
+        </section>
+      )}
+
+      {lifeExp.length > 0 && (
+        <section id="life-experiments">
+          <ContentRow title="Life Experiments" posts={lifeExp} />
+        </section>
+      )}
+
+      {caseStudies.length > 0 && (
+        <section id="case-studies">
+          <ContentRow title="Case Studies" posts={caseStudies} />
+        </section>
+      )}
+
+      {posts.length === 0 && !loading && (
+        <div className="reader-empty">
+          <p>No posts published yet.</p>
+        </div>
+      )}
     </>
   );
 }
