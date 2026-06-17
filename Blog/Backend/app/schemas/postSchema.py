@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 from app.enums.categoryEnum import CategoryEnum
+from app.schemas.tagSchema import TagResponse
 
 
 class PostCreate(BaseModel):
@@ -23,9 +24,13 @@ class PostUpdateRequest(BaseModel):
 class PostResponse(BaseModel):
     id: int
     title: str
+    slug: str
     content: str
-    category: Optional[CategoryEnum] = None
+    category: CategoryEnum
+    is_published: bool
     created_at: datetime
+    updated_at: Optional[datetime] = None
+    tags: list[TagResponse] = []
 
     class Config:
         from_attributes = True
