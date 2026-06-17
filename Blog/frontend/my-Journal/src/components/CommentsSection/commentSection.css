@@ -120,3 +120,34 @@
   font-size: 0.95rem;
   line-height: 1.7;
 }
+
+.comment-empty {
+  color: #3f3f46;
+  font-size: 0.9rem;
+  padding: 1.5rem 0;
+}
+
+.comment-error {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.comment-loading {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.comment-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #27272a;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: cspin 0.75s linear infinite;
+}
+
+@keyframes cspin {
+  to { transform: rotate(360deg); }
+}

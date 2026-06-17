@@ -1,59 +1,101 @@
-.article-card{
-
-    min-width:320px;
-
-    height:220px;
-
-    padding:1.5rem;
-
-    border-radius:20px;
-
-    background:#111111;
-
-    border:1px solid #27272a;
-
-    transition:.3s;
-
-    cursor:pointer;
+.article-card {
+  min-width: 300px;
+  border-radius: 16px;
+  background: #111111;
+  border: 1px solid #27272a;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
 }
 
-.article-card:hover{
-
-    transform:
+.article-card:hover {
+  transform:
     perspective(1000px)
-    rotateX(4deg)
-    rotateY(-8deg)
-    scale(1.04);
-
-    background:#18181b;
+    rotateX(3deg)
+    rotateY(-6deg)
+    scale(1.03);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  background: #18181b;
 }
 
-.article-card span{
-
-    color:#71717a;
+/* ── Photo thumbnail ── */
+.card-image {
+  width: 100%;
+  height: 145px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #18181b;
 }
 
-.article-card h3{
-
-    color:white;
-
-    margin-top:1rem;
-
-    margin-bottom:1rem;
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
-.article-card p{
-
-    color:#a1a1aa;
-
-    line-height:1.6;
+/* subtle dark vignette so badge stays readable */
+.card-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.05) 55%,
+    transparent 100%
+  );
+  z-index: 1;
 }
 
-.article-card small{
+.card-category-badge {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-transform: uppercase;
+  z-index: 2;
+}
 
-    display:block;
+/* ── Text body ── */
+.card-body {
+  padding: 1.2rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
-    margin-top:1.5rem;
+.article-card h3 {
+  color: white;
+  font-size: 0.97rem;
+  line-height: 1.45;
+  margin: 0 0 0.5rem;
+}
 
-    color:#71717a;
+.article-card p {
+  color: #a1a1aa;
+  line-height: 1.6;
+  font-size: 0.85rem;
+  margin: 0;
+  flex: 1;
+}
+
+.article-card small {
+  display: block;
+  margin-top: 1rem;
+  color: #52525b;
+  font-size: 0.76rem;
 }

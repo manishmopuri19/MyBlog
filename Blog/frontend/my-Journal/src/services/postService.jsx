@@ -46,3 +46,19 @@ export const unpublishPost = async (id) => {
   const response = await api.patch(`/posts/${id}/unpublish`);
   return response.data;
 };
+
+// ── Comments ──
+
+export const getComments = async (postId) => {
+  const response = await api.get(`/posts/${postId}/comments`);
+  return response.data;
+};
+
+export const createComment = async (postId, content) => {
+  const response = await api.post(`/posts/${postId}/comments`, { content });
+  return response.data;
+};
+
+export const deleteComment = async (postId, commentId) => {
+  await api.delete(`/posts/${postId}/comments/${commentId}`);
+};

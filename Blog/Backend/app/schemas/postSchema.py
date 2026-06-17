@@ -7,6 +7,7 @@ from app.schemas.tagSchema import TagResponse
 
 class PostCreate(BaseModel):
     title: str = Field(min_length=3, max_length=255)
+    description: Optional[str] = Field(default=None, max_length=500)
     content: str = Field(min_length=10)
     category: CategoryEnum
     is_published: bool = False
@@ -15,6 +16,7 @@ class PostCreate(BaseModel):
 
 class PostUpdateRequest(BaseModel):
     title: Optional[str] = None
+    description: Optional[str] = None
     content: Optional[str] = None
     category: Optional[CategoryEnum] = None
     is_published: Optional[bool] = None
@@ -25,6 +27,7 @@ class PostResponse(BaseModel):
     id: int
     title: str
     slug: str
+    description: Optional[str] = None
     content: str
     category: CategoryEnum
     is_published: bool
