@@ -8,6 +8,7 @@ from app.services.postService import (
     update_post, publish_post, unpublish_post
 )
 from app.dependencies.permission import admin_required
+from app.dependencies.auth import get_current_user
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
@@ -22,7 +23,7 @@ def create_post_endpoint(
 
 
 @router.get("", response_model=list[PostResponse])
-def get_all_posts(db: Session = Depends(get_db)):
+def get_all_posts(db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     return get_posts(db)
 
 
@@ -36,12 +37,12 @@ def get_admin_all_posts(
 
 
 @router.get("/slug/{slug}", response_model=PostResponse)
-def get_post_by_slug_endpoint(slug: str, db: Session = Depends(get_db)):
+def get_post_by_slug_endpoint(slug: str, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     return get_post_by_slug(db, slug)
 
 
 @router.get("/{post_id}", response_model=PostResponse)
-def get_post(post_id: int, db: Session = Depends(get_db)):
+def get_post(post_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     return get_post_by_id(db, post_id)
 
 

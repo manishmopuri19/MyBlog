@@ -14,7 +14,14 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/reader" element={<ReaderHome />} />
+      <Route
+        path="/reader"
+        element={
+          <ProtectedRoute>
+            <ReaderHome />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/posts/:slug" element={<BlogDetails />} />
       <Route
         path="/admin"
