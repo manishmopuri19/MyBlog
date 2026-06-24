@@ -8,28 +8,10 @@ import {
 import "./AdminWrite.css";
 
 const CATEGORIES = [
-  { value: "PERSONAL", label: "Personal" },
-  { value: "TECHNOLOGY", label: "Technology" },
-  { value: "PHILOSOPHY", label: "Philosophy" },
-  { value: "CONCEPTS", label: "Concepts" },
-  { value: "FAKE_SIMULATIONS", label: "Fake Simulations" },
-  { value: "RESEARCH", label: "Research" },
-  { value: "LIFE_EXPERIMENTS", label: "Life Experiments" },
-  { value: "CASE_STUDIES", label: "Case Studies" },
-  { value: "CONFESSION", label: "Confession" },
+  "Personal", "Technology", "Philosophy", "Concepts",
+  "Fake Simulations", "Research", "Life Experiments", "Case Studies",
+  "Confession",
 ];
-
-const CATEGORY_LABELS = {
-  PERSONAL: "Personal",
-  TECHNOLOGY: "Technology",
-  PHILOSOPHY: "Philosophy",
-  CONCEPTS: "Concepts",
-  FAKE_SIMULATIONS: "Fake Simulations",
-  RESEARCH: "Research",
-  LIFE_EXPERIMENTS: "Life Experiments",
-  CASE_STUDIES: "Case Studies",
-  CONFESSION: "Confession",
-};
 
 const EMPTY_FORM = { title: "", description: "", content: "", category: "Personal", is_published: false };
 
