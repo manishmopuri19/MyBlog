@@ -4,21 +4,21 @@ function FeaturedBanner() {
   return (
     <section className="featured-banner">
       <div className="banner-text">
-        <span className="banner-label">FEATURED ARTICLE</span>
-        <h1>The Future Is A Hallucination</h1>
+        <span className="banner-label">WELCOME TO MY SPACE</span>
+        <h1>Hey guys, enjoy reading my blog &amp; confessions</h1>
         <p>
-          Exploring how humans simulate reality and why perception might be the
-          greatest illusion ever created.
+          If you find them interesting, reach out to me — I'd love to hear from you!
         </p>
-        <button className="banner-btn">Read Article</button>
+        <a className="banner-btn" href="mailto:manishsreeram2@gmail.com">
+          manishsreeram2@gmail.com
+        </a>
       </div>
 
       <div className="banner-visual">
-        <div className="banner-glow" />
-        <div className="banner-orb" />
-        <div className="banner-ring banner-ring-1" />
-        <div className="banner-ring banner-ring-2" />
-        <div className="banner-ring banner-ring-3" />
+        <div className="banner-avatar-frame">
+          <div className="avatar-head-ring" />
+          <div className="avatar-body-ring" />
+        </div>
       </div>
     </section>
   );
