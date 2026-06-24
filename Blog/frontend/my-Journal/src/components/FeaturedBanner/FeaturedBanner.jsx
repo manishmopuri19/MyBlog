@@ -16,8 +16,8 @@ function FeaturedBanner() {
 
       <div className="banner-visual">
         <img
-          src="/hero-image.jpg"
-          alt="profile"
+          src="/hero-image.png"
+          alt="hero"
           className="banner-hero-img"
         />
       </div>

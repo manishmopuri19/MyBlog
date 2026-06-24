@@ -11,7 +11,7 @@
 /* ── Left text column ── */
 .banner-text {
   flex: 1;
-  max-width: 560px;
+  max-width: 520px;
   z-index: 1;
 }
 
@@ -64,11 +64,12 @@
 }
 
 .banner-hero-img {
-  width: 340px;
-  height: 440px;
+  width: 100%;
+  max-width: 480px;
+  height: 300px;
   object-fit: cover;
-  object-position: center top;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+  object-position: center 25%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
 }

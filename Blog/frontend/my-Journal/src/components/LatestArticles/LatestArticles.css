@@ -1,23 +1,171 @@
-.latest-section{
-
-    padding:4rem 6rem;
+.latest-section {
+  padding: 4rem 6rem 6rem;
+  background: #09090b;
 }
 
-.latest-section h2{
-
-    color:white;
-
-    margin-bottom:2rem;
-
-    font-size:2rem;
+.latest-label {
+  color: #52525b;
+  letter-spacing: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
-.latest-grid{
+.latest-section h2 {
+  color: white;
+  margin-bottom: 2.8rem;
+  font-size: 2.2rem;
+}
 
-    display:grid;
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
 
-    grid-template-columns:
-    repeat(3,1fr);
+/* ── Card shell ── */
+.la-card {
+  background: #111111;
+  border: 1px solid #27272a;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+}
 
-    gap:2rem;
+.la-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ── Header row ── */
+.la-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.4rem 0;
+}
+
+.la-card-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.la-card-counter {
+  font-size: 0.72rem;
+  color: #3f3f46;
+}
+
+/* ── Body with fade ── */
+.la-card-body {
+  padding: 1.2rem 1.4rem 1.6rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.la-show { opacity: 1; transform: translateY(0); }
+.la-hide { opacity: 0; transform: translateY(6px); }
+
+/* ── Quote card ── */
+.la-quote-text {
+  color: white;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+}
+
+/* ── Equation card ── */
+.la-eq-math {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 2.2rem;
+  color: white;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.2rem;
+}
+
+.la-eq-name {
+  color: #a1a1aa;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.la-eq-desc {
+  color: #71717a;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* ── Fact card ── */
+.la-fact-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  width: fit-content;
+}
+
+.la-fact-text {
+  color: white;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* ── Shared source line ── */
+.la-source {
+  color: #3f3f46;
+  font-size: 0.78rem;
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+/* ── Progress bar at bottom ── */
+.la-card-bar {
+  height: 2px;
+  background: #1c1c1f;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.la-card-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  animation: la-fill linear forwards;
+}
+
+@keyframes la-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .latest-section {
+    padding: 4rem 2rem;
+  }
+  .latest-grid {
+    grid-template-columns: 1fr;
+  }
 }
