@@ -101,10 +101,13 @@ export default function AdminWrite() {
       await fetchPosts();
       setTimeout(backToList, 1000);
     } catch (err) {
-      setMessage({
-        type: "error",
-        text: err.response?.data?.detail || "Something went wrong.",
-      });
+      const detail = err.response?.data?.detail;
+      const text = Array.isArray(detail)
+        ? detail.map((e) => e.msg || JSON.stringify(e)).join(", ")
+        : typeof detail === "string"
+        ? detail
+        : "Something went wrong.";
+      setMessage({ type: "error", text });
     } finally {
       setSubmitting(false);
     }
@@ -220,6 +223,9 @@ export default function AdminWrite() {
           <span className="footer-dot">·</span>
           <span>{form.content.length} chars</span>
         </div>
+
+
+        
       </div>
     );
   }
