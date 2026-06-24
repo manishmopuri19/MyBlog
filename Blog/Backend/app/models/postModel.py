@@ -1,11 +1,7 @@
-from sqlalchemy import Column,Integer,String,Text,ForeignKey,DateTime,Boolean
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime, Boolean
 from app.database.database import Base
-
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from sqlalchemy import Enum as SQLEnum
-from app.enums.categoryEnum import CategoryEnum
-
 from app.models.post_tagModel import post_tags
 class Post(Base):
     __tablename__="posts"
@@ -41,10 +37,7 @@ class Post(Base):
         ForeignKey("users.id")
 
     )
-    category = Column(
-    SQLEnum(CategoryEnum),
-    nullable=False
-)
+    category = Column(String(50), nullable=False)
 
   
 
