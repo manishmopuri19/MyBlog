@@ -24,11 +24,16 @@ _CATEGORY_MAPPING = {
 
 def _migrate_category_column():
     """
-    Converts the `category` column from PostgreSQL ENUM → VARCHAR(50).
-    Runs once on startup; skips automatically if already migrated.
+    Converts the `category` column from PostgreSQL ENUM to VARCHAR(50).
+    Runs once on startup; idempotent — skips if column is already VARCHAR.
+
+    Bug fix vs previous version: ALTER COLUMN must happen BEFORE the UPDATE
+    statements. Writing a title-case value (e.g. 'Concepts') to a column that
+    is still ENUM fails unless that exact string is already in the enum.
+    Converting to VARCHAR first removes the constraint, then the UPDATEs can
+    freely rewrite values.
     """
     try:
-        # ── 1. Check whether migration is still needed ──────────────────
         with engine.connect() as conn:
             row = conn.execute(text(
                 "SELECT data_type FROM information_schema.columns "
@@ -39,34 +44,43 @@ def _migrate_category_column():
             print("[startup] category column is already VARCHAR — skipping migration")
             return
 
-        print("[startup] migrating category column ENUM → VARCHAR …")
+        print("[startup] migrating category column ENUM -> VARCHAR ...")
 
-        # ── 2. Add CONFESSION to the existing enum ───────────────────────
-        # ALTER TYPE ADD VALUE must run outside a transaction (autocommit).
-        # We use the raw psycopg2 connection to guarantee this.
+        # Step 1 — add every display value to the enum so the USING cast in
+        # ALTER TABLE does not choke on rows that already hold a title-case
+        # value (e.g. 'Confession' inserted before this migration ran).
+        # ALTER TYPE ADD VALUE must run outside any transaction.
         raw = engine.raw_connection()
         try:
             raw.autocommit = True
             cur = raw.cursor()
-            cur.execute("ALTER TYPE categoryenum ADD VALUE IF NOT EXISTS 'CONFESSION'")
+            for display in _CATEGORY_MAPPING.values():
+                cur.execute(
+                    f"ALTER TYPE categoryenum ADD VALUE IF NOT EXISTS '{display}'"
+                )
             cur.close()
         finally:
             raw.close()
 
-        # ── 3. Rewrite stored uppercase names → display values ───────────
-        # ── 4. Convert column type from ENUM → VARCHAR ───────────────────
+        # Step 2 — convert the column to VARCHAR FIRST.
+        # At this point rows still hold uppercase values (e.g. 'TECHNOLOGY').
+        # After this step the column has no enum constraint at all.
+        with engine.begin() as conn:
+            conn.execute(text(
+                "ALTER TABLE posts "
+                "ALTER COLUMN category TYPE VARCHAR(50) USING category::varchar"
+            ))
+
+        # Step 3 — now that the column is plain VARCHAR, rewrite the stored
+        # uppercase names to human-readable display values.
         with engine.begin() as conn:
             for old, new in _CATEGORY_MAPPING.items():
                 conn.execute(
                     text("UPDATE posts SET category = :new WHERE category = :old"),
                     {"new": new, "old": old},
                 )
-            conn.execute(text(
-                "ALTER TABLE posts "
-                "ALTER COLUMN category TYPE VARCHAR(50) USING category::varchar"
-            ))
 
-        print("[startup] category column migrated: ENUM → VARCHAR ✓")
+        print("[startup] category column migrated: ENUM -> VARCHAR OK")
 
     except Exception as exc:
         print(f"[startup] category migration error: {exc}")
