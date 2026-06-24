@@ -8,21 +8,27 @@ import {
 import "./AdminWrite.css";
 
 const CATEGORIES = [
-  "Personal", "Technology", "Philosophy", "Concepts",
-  "Fake Simulations", "Research", "Life Experiments", "Case Studies",
-  "Confession",
+  { value: "PERSONAL", label: "Personal" },
+  { value: "TECHNOLOGY", label: "Technology" },
+  { value: "PHILOSOPHY", label: "Philosophy" },
+  { value: "CONCEPTS", label: "Concepts" },
+  { value: "FAKE_SIMULATIONS", label: "Fake Simulations" },
+  { value: "RESEARCH", label: "Research" },
+  { value: "LIFE_EXPERIMENTS", label: "Life Experiments" },
+  { value: "CASE_STUDIES", label: "Case Studies" },
+  { value: "CONFESSION", label: "Confession" },
 ];
 
-const CAT_CLASS = {
-  "Personal":         "cat-personal",
-  "Technology":       "cat-technology",
-  "Philosophy":       "cat-philosophy",
-  "Concepts":         "cat-concepts",
-  "Fake Simulations": "cat-simulations",
-  "Research":         "cat-research",
-  "Life Experiments": "cat-life",
-  "Case Studies":     "cat-cases",
-  "Confession":       "cat-confession",
+const CATEGORY_LABELS = {
+  PERSONAL: "Personal",
+  TECHNOLOGY: "Technology",
+  PHILOSOPHY: "Philosophy",
+  CONCEPTS: "Concepts",
+  FAKE_SIMULATIONS: "Fake Simulations",
+  RESEARCH: "Research",
+  LIFE_EXPERIMENTS: "Life Experiments",
+  CASE_STUDIES: "Case Studies",
+  CONFESSION: "Confession",
 };
 
 const EMPTY_FORM = { title: "", description: "", content: "", category: "Personal", is_published: false };
@@ -225,7 +231,7 @@ export default function AdminWrite() {
         </div>
 
 
-        
+
       </div>
     );
   }
