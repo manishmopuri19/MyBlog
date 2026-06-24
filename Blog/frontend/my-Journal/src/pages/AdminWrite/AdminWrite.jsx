@@ -334,7 +334,7 @@ export default function AdminWrite() {
                 <div className="posts-row" key={post.id}>
                   <span className="pr-title">{post.title}</span>
 
-                  <span className={`pr-cat ${CAT_CLASS[post.category] ?? ""}`}>
+                  <span className="pr-cat">
                     {post.category}
                   </span>
 
