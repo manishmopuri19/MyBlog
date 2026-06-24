@@ -10,6 +10,7 @@ import "./AdminWrite.css";
 const CATEGORIES = [
   "Personal", "Technology", "Philosophy", "Concepts",
   "Fake Simulations", "Research", "Life Experiments", "Case Studies",
+  "Confession",
 ];
 
 const CAT_CLASS = {
@@ -21,6 +22,7 @@ const CAT_CLASS = {
   "Research":         "cat-research",
   "Life Experiments": "cat-life",
   "Case Studies":     "cat-cases",
+  "Confession":       "cat-confession",
 };
 
 const EMPTY_FORM = { title: "", description: "", content: "", category: "Personal", is_published: false };

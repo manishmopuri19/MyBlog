@@ -1,36 +1,95 @@
-.featured-thought{
-    padding: 8rem 6rem;
-
-    text-align: center;
+.featured-thought {
+  padding: 8rem 6rem;
+  text-align: center;
+  background: #09090b;
+  min-height: 42vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.featured-label{
-    color: #71717a;
-    letter-spacing: 2px;
-    margin-top: 1rem;
+/* ── Fade transition ── */
+.ft-inner {
+  max-width: 820px;
+  transition: opacity 0.38s ease, transform 0.38s ease;
 }
 
-
-.featured-thought h2{
-    font-size: 4rem;
-    color: white;
-    margin-bottom: 1rem;
-
+.ft-show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.featured-description{
-    color: #a1a1aa;
-    max-width: 700px;
-    margin: auto;
-    line-height: 1.8;
+.ft-hide {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
-.featured-thought button{
-    margin-top:2rem;
-    padding :1rem 2rem;
-    background: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+/* ── Type label ── */
+.ft-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
 
+/* ── Main heading ── */
+.ft-h2 {
+  font-size: 2.8rem;
+  color: white;
+  line-height: 1.25;
+  margin: 0 0 1.2rem;
+  font-weight: 700;
+}
+
+/* Equations get a monospace / larger treatment */
+.ft-equation {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+}
+
+/* ── Sub-text ── */
+.ft-sub {
+  color: #71717a;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+/* ── Source attribution ── */
+.ft-source {
+  color: #52525b;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  margin-top: 0.4rem;
+}
+
+/* ── Dot navigation ── */
+.ft-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ft-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #27272a;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.ft-dot:hover {
+  transform: scale(1.4);
+}
+
+.ft-dot.active {
+  transform: scale(1.3);
 }
