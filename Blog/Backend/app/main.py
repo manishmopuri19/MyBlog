@@ -9,30 +9,26 @@ from app.routes.postRouter import router as post_router
 from app.routes.commentRouter import router as comment_router
 
 
-# Maps PostgreSQL-stored uppercase member names → display values
 _CATEGORY_MAPPING = {
-    "PERSONAL":          "Personal",
-    "TECHNOLOGY":        "Technology",
-    "PHILOSOPHY":        "Philosophy",
-    "CONCEPTS":          "Concepts",
-    "FAKE_SIMULATIONS":  "Fake Simulations",
-    "RESEARCH":          "Research",
-    "LIFE_EXPERIMENTS":  "Life Experiments",
-    "CASE_STUDIES":      "Case Studies",
-    "CONFESSION":        "Confession",
+    "PERSONAL":         "Personal",
+    "TECHNOLOGY":       "Technology",
+    "PHILOSOPHY":       "Philosophy",
+    "CONCEPTS":         "Concepts",
+    "FAKE_SIMULATIONS": "Fake Simulations",
+    "RESEARCH":         "Research",
+    "LIFE_EXPERIMENTS": "Life Experiments",
+    "CASE_STUDIES":     "Case Studies",
+    "CONFESSION":       "Confession",
 }
 
 
 def _migrate_category_column():
     """
-    One-time idempotent migration:
-      1. Add CONFESSION to the PostgreSQL enum (if still enum type).
-      2. Rewrite stored uppercase names to display values.
-      3. Convert the column from ENUM → VARCHAR so future categories
-         never need another DB migration.
-    Safe to run on every startup — skips if already migrated.
+    Converts the `category` column from PostgreSQL ENUM → VARCHAR(50).
+    Runs once on startup; skips automatically if already migrated.
     """
     try:
+        # ── 1. Check whether migration is still needed ──────────────────
         with engine.connect() as conn:
             row = conn.execute(text(
                 "SELECT data_type FROM information_schema.columns "
@@ -40,20 +36,30 @@ def _migrate_category_column():
             )).fetchone()
 
         if not row or row[0] != "USER-DEFINED":
-            return  # Already migrated to VARCHAR — nothing to do
+            print("[startup] category column is already VARCHAR — skipping migration")
+            return
 
-        # ALTER TYPE ADD VALUE cannot run inside a transaction in PostgreSQL
-        with engine.execution_options(isolation_level="AUTOCOMMIT").connect() as conn:
-            conn.execute(text(
-                "ALTER TYPE categoryenum ADD VALUE IF NOT EXISTS 'CONFESSION'"
-            ))
+        print("[startup] migrating category column ENUM → VARCHAR …")
 
-        # Rewrite values + change column type in one transaction
+        # ── 2. Add CONFESSION to the existing enum ───────────────────────
+        # ALTER TYPE ADD VALUE must run outside a transaction (autocommit).
+        # We use the raw psycopg2 connection to guarantee this.
+        raw = engine.raw_connection()
+        try:
+            raw.autocommit = True
+            cur = raw.cursor()
+            cur.execute("ALTER TYPE categoryenum ADD VALUE IF NOT EXISTS 'CONFESSION'")
+            cur.close()
+        finally:
+            raw.close()
+
+        # ── 3. Rewrite stored uppercase names → display values ───────────
+        # ── 4. Convert column type from ENUM → VARCHAR ───────────────────
         with engine.begin() as conn:
-            for name, val in _CATEGORY_MAPPING.items():
+            for old, new in _CATEGORY_MAPPING.items():
                 conn.execute(
-                    text("UPDATE posts SET category = :val WHERE category = :name"),
-                    {"val": val, "name": name},
+                    text("UPDATE posts SET category = :new WHERE category = :old"),
+                    {"new": new, "old": old},
                 )
             conn.execute(text(
                 "ALTER TABLE posts "
@@ -63,7 +69,7 @@ def _migrate_category_column():
         print("[startup] category column migrated: ENUM → VARCHAR ✓")
 
     except Exception as exc:
-        print(f"[startup] category migration skipped/failed (non-fatal): {exc}")
+        print(f"[startup] category migration error: {exc}")
 
 
 @asynccontextmanager
