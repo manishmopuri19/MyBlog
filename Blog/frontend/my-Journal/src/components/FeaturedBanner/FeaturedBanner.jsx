@@ -15,10 +15,11 @@ function FeaturedBanner() {
       </div>
 
       <div className="banner-visual">
-        <div className="banner-avatar-frame">
-          <div className="avatar-head-ring" />
-          <div className="avatar-body-ring" />
-        </div>
+        <img
+          src="/hero-image.jpg"
+          alt="profile"
+          className="banner-hero-img"
+        />
       </div>
     </section>
   );

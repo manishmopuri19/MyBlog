@@ -70,6 +70,43 @@
   z-index: 2;
 }
 
+/* ── Confession dark-romantic visual ── */
+.card-image--confession {
+  background: linear-gradient(135deg, #0d0005 0%, #3a0018 50%, #0d000d 100%);
+}
+
+.confession-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 60%, rgba(180, 20, 60, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.confession-petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  border: 1px solid rgba(220, 60, 100, 0.4);
+  pointer-events: none;
+}
+
+.confession-petal-1 {
+  width: 80px;
+  height: 80px;
+  bottom: 18px;
+  right: 28px;
+  transform: rotate(45deg);
+  box-shadow: inset 0 0 20px rgba(200, 30, 70, 0.2);
+}
+
+.confession-petal-2 {
+  width: 55px;
+  height: 55px;
+  bottom: 34px;
+  right: 52px;
+  transform: rotate(15deg);
+  border-color: rgba(220, 60, 100, 0.25);
+}
+
 /* ── Text body ── */
 .card-body {
   padding: 1.2rem 1.4rem 1.4rem;

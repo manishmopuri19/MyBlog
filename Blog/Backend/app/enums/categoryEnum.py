@@ -17,3 +17,5 @@ class CategoryEnum(str,Enum):
     LIFE_EXPERIMENTS = "Life Experiments"
 
     CASE_STUDIES = "Case Studies"
+
+    CONFESSION = "Confession"
