@@ -1,0 +1,223 @@
+.journey-section {
+  background: #09090b;
+  padding: 6rem 6rem 5rem;
+}
+
+.journey-label {
+  color: #52525b;
+  letter-spacing: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.journey-heading {
+  color: white;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+  line-height: 1.2;
+}
+
+.journey-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* ── Base card ── */
+.journey-card {
+  border-radius: 20px;
+  border: 1px solid #27272a;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Visual area ── */
+.journey-card-visual {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Journal visual — dark tech/purple */
+.journey-card--journal {
+  background: #0f0f12;
+}
+
+.journey-card--journal:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 24px 60px rgba(139, 92, 246, 0.15);
+}
+
+.journey-card--journal .journey-card-visual {
+  background: #0a0a0f;
+}
+
+.jc-orb {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 36% 34%,
+    rgba(216, 180, 254, 0.9) 0%,
+    rgba(139, 92, 246, 0.6) 38%,
+    rgba(67, 56, 202, 0.2) 65%,
+    transparent 85%
+  );
+  box-shadow:
+    0 0 40px rgba(139, 92, 246, 0.5),
+    0 0 80px rgba(139, 92, 246, 0.18);
+  position: relative;
+  z-index: 2;
+}
+
+.jc-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.jc-ring-1 {
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  animation: jc-spin 10s linear infinite;
+}
+
+.jc-ring-2 {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  animation: jc-spin 14s linear infinite reverse;
+}
+
+@keyframes jc-spin {
+  from { transform: rotateX(70deg) rotateZ(0deg); }
+  to   { transform: rotateX(70deg) rotateZ(360deg); }
+}
+
+/* Confession visual — dark romantic crimson */
+.journey-card--confession {
+  background: #0d0007;
+}
+
+.journey-card--confession:hover {
+  border-color: rgba(180, 30, 70, 0.45);
+  box-shadow: 0 24px 60px rgba(180, 20, 60, 0.2);
+}
+
+.journey-card--confession .journey-card-visual {
+  background: linear-gradient(135deg, #0d0005 0%, #2e0012 55%, #0d000d 100%);
+}
+
+.jc-confession-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 30, 70, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.jc-petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  border: 1.5px solid rgba(220, 60, 100, 0.5);
+  pointer-events: none;
+}
+
+.jc-petal-1 {
+  width: 110px;
+  height: 110px;
+  transform: rotate(45deg);
+  box-shadow: inset 0 0 30px rgba(200, 30, 70, 0.15);
+}
+
+.jc-petal-2 {
+  width: 75px;
+  height: 75px;
+  transform: rotate(20deg) translate(20px, -15px);
+  border-color: rgba(220, 60, 100, 0.3);
+}
+
+.jc-petal-3 {
+  width: 50px;
+  height: 50px;
+  transform: rotate(70deg) translate(-25px, 20px);
+  border-color: rgba(220, 60, 100, 0.2);
+}
+
+/* ── Card body ── */
+.journey-card-body {
+  padding: 1.8rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.journey-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8b5cf6;
+}
+
+.journey-tag--confession {
+  color: #c41e50;
+}
+
+.journey-card h3 {
+  color: white;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.journey-card p {
+  color: #71717a;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.journey-cta {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a78bfa;
+  letter-spacing: 0.5px;
+  transition: letter-spacing 0.2s;
+}
+
+.journey-cta--confession {
+  color: #e05080;
+}
+
+.journey-card:hover .journey-cta {
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .journey-section {
+    padding: 4rem 2rem;
+  }
+  .journey-cards {
+    grid-template-columns: 1fr;
+  }
+  .journey-heading {
+    font-size: 2rem;
+  }
+}

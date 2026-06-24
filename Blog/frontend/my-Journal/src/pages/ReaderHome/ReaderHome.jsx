@@ -28,6 +28,7 @@ function ReaderHome() {
   const simulations = posts.filter((p) => p.category === "Fake Simulations");
   const lifeExp     = posts.filter((p) => p.category === "Life Experiments");
   const caseStudies = posts.filter((p) => p.category === "Case Studies");
+  const confessions = posts.filter((p) => p.category === "Confession");
 
   return (
     <>
@@ -83,6 +84,12 @@ function ReaderHome() {
       {caseStudies.length > 0 && (
         <section id="case-studies">
           <ContentRow title="Case Studies" posts={caseStudies} />
+        </section>
+      )}
+
+      {confessions.length > 0 && (
+        <section id="confessions">
+          <ContentRow title="Confessions" posts={confessions} />
         </section>
       )}
 

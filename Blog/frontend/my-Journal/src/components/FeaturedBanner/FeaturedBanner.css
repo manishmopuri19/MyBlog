@@ -1,8 +1,8 @@
 .featured-banner {
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
-  padding: 0 6rem;
+  padding: 5rem 6rem;
   background: #09090b;
   gap: 4rem;
   overflow: hidden;
@@ -11,7 +11,7 @@
 /* ── Left text column ── */
 .banner-text {
   flex: 1;
-  max-width: 580px;
+  max-width: 560px;
   z-index: 1;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .banner-text h1 {
-  font-size: 3.4rem;
+  font-size: 3.2rem;
   color: white;
   margin: 1.2rem 0 1rem;
   line-height: 1.15;
@@ -33,7 +33,7 @@
 .banner-text p {
   color: #a1a1aa;
   line-height: 1.85;
-  max-width: 480px;
+  max-width: 460px;
   font-size: 1rem;
 }
 
@@ -55,46 +55,20 @@
   transform: translateY(-2px);
 }
 
-/* ── Right avatar placeholder ── */
+/* ── Right image ── */
 .banner-visual {
   flex: 1;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.banner-avatar-frame {
-  width: 200px;
-  height: 240px;
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  border-radius: 16px;
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-}
-
-/* head outline */
-.avatar-head-ring {
-  position: absolute;
-  top: 38px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-/* shoulders / body outline */
-.avatar-body-ring {
-  position: absolute;
-  bottom: -32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 170px;
-  height: 130px;
-  border-radius: 50% 50% 0 0;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  border-bottom: none;
+.banner-hero-img {
+  width: 340px;
+  height: 440px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
 }

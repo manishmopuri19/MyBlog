@@ -1,12 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import "./Hero.css"
 import HeroScene from "../Hero/HeroScenece";
 
 function Hero(){
-    
-
+    const navigate = useNavigate();
 
     return (
-
         <section className="hero">
             <div className="hero-left">
                 <p className="hero-tag">
@@ -14,7 +13,7 @@ function Hero(){
                 </p>
 
                 <h1>
-                    Thoughts, Concepts & Simulations 
+                    Thoughts, Concepts &amp; Simulations
                 </h1>
 
                 <p className="hero-decription">
@@ -25,14 +24,14 @@ function Hero(){
           of human thinking.
                 </p>
 
-                <button> start Exploring</button>
+                <button onClick={() => navigate("/reader")}>Start Exploring</button>
 
-                </div>
+            </div>
 
-                <div className="hero-right">
-                    <HeroScene />
-                </div>
-        
+            <div className="hero-right">
+                <HeroScene />
+            </div>
+
     </section>
     )
 }

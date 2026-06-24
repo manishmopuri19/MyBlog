@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./ArticleCard.css";
 
-// keys match exact backend CategoryEnum values (lowercased for lookup)
 const CATEGORY_IMAGES = {
   personal:
     "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80",
@@ -23,16 +22,25 @@ const CATEGORY_IMAGES = {
 
 function ArticleCard({ post }) {
   const navigate = useNavigate();
-  const imgUrl = CATEGORY_IMAGES[post.category?.toLowerCase()];
+  const categoryKey = post.category?.toLowerCase();
+  const imgUrl = CATEGORY_IMAGES[categoryKey];
+  const isConfession = categoryKey === "confession";
 
   return (
     <div
       className="article-card"
       onClick={() => navigate(`/posts/${post.slug}`)}
     >
-      <div className="card-image">
-        {imgUrl && (
+      <div className={`card-image${isConfession ? " card-image--confession" : ""}`}>
+        {imgUrl && !isConfession && (
           <img src={imgUrl} alt={post.category} className="card-img" />
+        )}
+        {isConfession && (
+          <>
+            <div className="confession-petal confession-petal-1" />
+            <div className="confession-petal confession-petal-2" />
+            <div className="confession-glow" />
+          </>
         )}
         <span className="card-category-badge">{post.category}</span>
       </div>
