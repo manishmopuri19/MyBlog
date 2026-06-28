@@ -57,8 +57,8 @@ export default function AdminWrite() {
   function startEdit(post) {
     setForm({
       title: post.title,
-      description: post.description || "",
-      content: post.content,
+      description: (post.description || "").replace(/\\n/g, "\n"),
+      content: (post.content || "").replace(/\\n/g, "\n"),
       category: post.category,
       is_published: post.is_published,
     });

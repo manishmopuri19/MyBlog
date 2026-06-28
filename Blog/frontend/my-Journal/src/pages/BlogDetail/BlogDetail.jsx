@@ -94,11 +94,12 @@ function BlogDetails() {
       <main className="post-body">
         <article className="post-content">
           {(post.content || post.excerpt || "")
-            .split("\n\n")
-            .filter(Boolean)
-            .map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
+            .replace(/\\n/g, "\n")
+            .trim()
+            .split("\n")
+            .map((para, i) =>
+              para === "" ? <br key={i} /> : <p key={i}>{para}</p>
+            )}
         </article>
 
         {/* ── Action bar ── */}
